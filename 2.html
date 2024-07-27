@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      color: #333;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-size: cover;
+    }
+
+    .form-container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .form-container h1 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 20px;
+      font-size: 2.5em;
+      font-weight: bold;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-control {
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .error {
+      color: #dc3545;
+      font-size: 0.875em;
+      margin-top: 5px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+
+    /* Graphics and Background Effects */
+    .background-graphics {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.3), transparent 50%), linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      background-size: cover, cover;
+      z-index: -1;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-graphics"></div>
+  <div class="form-container">
+    <form method="post" id="registrationForm">
+      <h1>Registration Form</h1>
+      <div class="form-group">
+        <label for="first">First Name:</label>
+        <input type="text" class="form-control" id="first" />
+        <div id="errFirst" class="error"></div>
+      </div>
+      <div class="form-group">
+        <label for="last">Last Name:</label>
+        <input type="text" class="form-control" id="last" />
+        <div id="errLast" class="error"></div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" />
+        <div id="errEmail" class="error"></div>
+      </div>
+      <div class="form-group">
+        <label for="uid">User ID:</label>
+        <input type="text" class="form-control" id="uid" />
+        <div id="errUid" class="error"></div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" />
+        <div id="errPassword" class="error"></div>
+      </div>
+      <div class="form-group">
+        <label for="confirm">Confirm Password:</label>
+        <input type="password" class="form-control" id="confirm" />
+        <div id="errConfirm" class="error"></div>
+      </div>
+      <div class="form-group">
+        <label for="mobile">Mobile Number:</label>
+        <input type="text" class="form-control" id="mobile" />
+        <div id="errMobile" class="error"></div>
+      </div>
+      <button type="submit" class="btn submit-btn">Submit</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap and Custom JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Show error message function
+    function showError(elementId, message) {
+      document.getElementById(elementId).innerText = message;
+    }
+
+    // Clear error message function
+    function clearError(elementId) {
+      document.getElementById(elementId).innerText = "";
+    }
+
+    // Validate first name
+    function validateFirstName() {
+      const firstName = document.getElementById('first').value;
+      if (firstName.length < 5) {
+        showError('errFirst', 'First name must be at least 5 characters long');
+        return false;
+      }
+      clearError('errFirst');
+      return true;
+    }
+
+    // Validate last name
+    function validateLastName() {
+      const lastName = document.getElementById('last').value;
+      if (lastName.length < 5) {
+        showError('errLast', 'Last name must be at least 5 characters long');
+        return false;
+      }
+      clearError('errLast');
+      return true;
+    }
+
+    // Validate email
+    function validateEmail() {
+      const email = document.getElementById('email').value;
+      if (!email.includes('@')) {
+        showError('errEmail', 'Enter a valid email with "@"');
+        return false;
+      }
+      clearError('errEmail');
+      return true;
+    }
+
+    // Validate user ID
+    function validateUserID() {
+      const userID = document.getElementById('uid').value;
+      if (userID.length < 5) {
+        showError('errUid', 'User ID must be at least 5 characters long');
+        return false;
+      }
+      clearError('errUid');
+      return true;
+    }
+
+    // Validate password
+    function validatePassword() {
+      const password = document.getElementById('password').value;
+      const userName = document.getElementById('uid').value;
+      if (password.length < 8) {
+        showError('errPassword', 'Password must be at least 8 characters long');
+        return false;
+      }
+      if (password.toLowerCase() === 'password' || password.toLowerCase() === userName.toLowerCase()) {
+        showError('errPassword', 'Password cannot be "password" or the same as the user ID');
+        return false;
+      }
+      clearError('errPassword');
+      return true;
+    }
+
+    // Validate confirm password
+    function validateConfirmPassword() {
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm').value;
+      if (password !== confirmPassword) {
+        showError('errConfirm', 'Passwords do not match');
+        return false;
+      }
+      clearError('errConfirm');
+      return true;
+    }
+
+    // Validate mobile number
+    function validateMobileNumber() {
+      const mobile = document.getElementById('mobile').value;
+      if (mobile.length !== 10 || isNaN(mobile) || mobile === '1234567890') {
+        showError('errMobile', 'Enter a valid 10-digit mobile number not equal to "1234567890"');
+        return false;
+      }
+      clearError('errMobile');
+      return true;
+    }
+
+    // Main validation function
+    function validateForm(event) {
+      event.preventDefault();
+      const isFirstNameValid = validateFirstName();
+      const isLastNameValid = validateLastName();
+      const isEmailValid = validateEmail();
+      const isUserIDValid = validateUserID();
+      const isPasswordValid = validatePassword();
+      const isConfirmPasswordValid = validateConfirmPassword();
+      const isMobileNumberValid = validateMobileNumber();
+
+      if (isFirstNameValid && isLastNameValid && isEmailValid && isUserIDValid && isPasswordValid && isConfirmPasswordValid && isMobileNumberValid) {
+        alert('Form submitted successfully!');
+        return true;
+      }
+      return false;
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('first').addEventListener('blur', validateFirstName);
+      document.getElementById('last').addEventListener('blur', validateLastName);
+      document.getElementById('email').addEventListener('blur', validateEmail);
+      document.getElementById('uid').addEventListener('blur', validateUserID);
+      document.getElementById('password').addEventListener('blur', validatePassword);
+      document.getElementById('confirm').addEventListener('blur', validateConfirmPassword);
+      document.getElementById('mobile').addEventListener('blur', validateMobileNumber);
+      document.getElementById('registrationForm').addEventListener('submit', validateForm);
+    });
+  </script>
+</body>
+</html>
